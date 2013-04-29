@@ -52,7 +52,7 @@ inuit.css는 리셋 CSS를 차용했지만, 너무 고지식한 리셋은 없애
 
 ### Clearfix ###
 
-inuit.css에서는 "micro clearfix"라는 방법을 쓴다. CSS로 요소의 앞과 뒤에 `display`가 `table`인 가짜 요소를 만들어서 위쪽 여백이 접히는 것을 막고, 요소 뒤쪽을 `clear`해주는 방식이다. Firefox 3.5 이상, Safari 4 이상, Chrome, Opera 9 이상, IE 6 이상에서 모두 지원된다. 다만 IE6, 7에서  hasLayout 프로퍼티를 켜고 부동(`float`) 요소를 포함하게 하려면 `*zoom: 1;`을 선언해야 한다고 돼 있는데, inuit.css에는 이것이 포함돼 있지 않다. 
+inuit.css에서는 "micro clearfix"라는 방법을 쓴다. CSS로 요소의 앞과 뒤에 `display`가 `table`인 가짜 요소를 만들어서 위쪽 여백이 접히는 것을 막고, 요소 뒤쪽을 `clear`해주는 방식이다. Firefox 3.5 이상, Safari 4 이상, Chrome, Opera 9 이상, IE 6 이상에서 모두 지원된다. 다만 IE6, 7에서  hasLayout 프로퍼티를 켜고 부동(`float`) 요소를 포함하게 하려면 `*zoom: 1;`을 선언해야 한다. 
 
 inuit.css에서는 `cf` 클래스를 를 일일이 붙여주기 보다는, 그 클래스를 확장하라고 한다.
 
