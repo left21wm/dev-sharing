@@ -24,42 +24,40 @@
 
     //===== book custom post type =====
 
-    function mpub_custom_init() {
-      $labels = array(
-        'name' => '책',
-        'singular_name' => '책',
-        'add_new' => '책 추가',
-        'add_new_item' => '책을 추가',
-        'edit_item' => '책 수정',
-        'new_item' => '새로운 책',
-        'all_items' => '책 목록',
-        'view_item' => '책 상세 보기',
-        'search_items' => '책 검색',
-        'not_found' =>  '등록된 책이 없습니다',
-        'not_found_in_trash' => '휴지통에 책이 없습니다',
-        'parent_item_colon' => '',
-        'menu_name' => '책'
-      );
-
+    function mpub_custom_post_type() {
       $args = array(
-        'labels' => $labels,
+        'label' => "책",
         'public' => true,
-        'publicly_queryable' => true,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'query_var' => true,
-        'rewrite' => array( 'slug' => 'book' ),
-        'capability_type' => 'post',
         'has_archive' => true,
-        'hierarchical' => false,
-        'menu_position' => null,
-        'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
+        'menu_position' => 5,
       );
 
       register_post_type( 'book', $args );
     }
-    add_action( 'init', 'mpub_custom_init' );
+    add_action( 'init', 'mpub_custom_post_type' );
 
 이렇게 하고 관리자 페이지에 들어가 보면, '책'이라는 메뉴가 생긴 것을 알 수 있다.
 
-![관리자 메뉴에 책 항목이 추가된 모습](img/img01-admin-book-menu.png)
+![관리자 메뉴에 책 항목이 추가된 모습](img/img01-admin-book-menu-simple.png)
+
+### `add_action`이란?
+
+일단 직접적으로 등록을 하는 부분은 바로 아래 코드다.
+
+    add_action( 'init', 'mpub_custom_post_type' );
+
+워드프레스를 초기화하는 단계(`init`)에 `mpub_custom_post_type`을 실행하라고 등록해 주는 것이다. 워드프레스는 엄청나게 많은 사이트에서 사용하는 플랫폼이다. 워드프레스의 기본적인 실행 코드(코어 파일)를 변경하지 않으면서도 중간중간에 개발자가 자신의 함수를 끼워넣을 수 있도록 해야 한다. 그걸 하도록 해 주는 게 바로 `add_action`과 `add_filter` 함수다. 
+
+워드프레스 코어 파일을 살펴 보면 곳곳에 `do_action( 'keywod' )`와 `apply_filter( 'keyword' )`라는 코드를 볼 수 있다. 개발자가 `add_action`과 `add_filter`로 등록한 함수를 바로 그 지점에서 실행하는 것이다.
+
+루트 폴더의 `wp-setting.php` 파일의 299~306번째 줄을 살펴 보면 아래와 같은 코드가 있다. 우리가 등록한 `mpub_custom_post_type` 함수가 바로 여기에서 실행되는 것이다.
+
+    /**
+     * Most of WP is loaded at this stage, and the user is authenticated. WP continues
+     * to load on the init hook that follows (e.g. widgets), and many plugins instantiate
+     * themselves on it for all sorts of reasons (e.g. they need a user, a taxonomy, etc.).
+     *
+     * If you wish to plug an action once WP is loaded, use the wp_loaded hook below.
+     */
+    do_action( 'init' );
+
