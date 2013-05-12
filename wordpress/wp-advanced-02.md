@@ -16,6 +16,8 @@
 
 ### 등록하기
 
+commit checksum : `fb6c08d`
+
 기본적인 내용은 [Codex의 register_post_type 함수 레퍼런스](http://codex.wordpress.org/Function_Reference/register_post_type)를 참고하면 된다.
 
 다운받은 예제 파일을 보면 `functions-custom-post-type.php`라고 있을 것이다. 이 파일은 `functions.php`에 `include`돼 있다.
@@ -105,5 +107,91 @@
 `$args->publicly_queryable`이 `null`이면 `$args->public`의 값을 집어 넣으라는 것이다.
 
 따라서 옵션이 되게 많은데, 대부분의 다른 옵션은 신경쓸 필요가 없다. 여튼간에, 나머지도 하나하나 보는 건 그리 나쁘지 않을 것이니 시간이 된다면 함수 레퍼런스 페이지의 인자값 설명을 해석해 보기 바란다.
+
+### 관리자 페이지의 이름표 상세화
+
+관리자 페이지를 보면 '책'이라는 메뉴 밑에 '새 글 추가'라고 메뉴명이 있다. 아래 이미지를 한 번 다시 살펴 보자.
+
+!['책' 밑에는 '새 글 추가'라고 씌어 있다.](img/img01-admin-book-menu-simple.png)
+
+'새 글 추가'는 별로다. '책 추가'라고 메뉴명을 적어 주고 싶다. '책'도 그냥 '책'이라고만 씌어 있는 것보다 '책 목록'이라고 쓰는 게 더 명확할 것이다. 어떻게 해야 할까?
+
+`$args`에서 `label` 대신에 `labels`를 옵션으로 주면 된다. 일단 `$labels`라고 배열을 준비하자. 
+
+    $labels = array(
+        'name' => '책',
+        'singular_name' => '책',
+        'add_new' => '책 추가',
+        'add_new_item' => '책 추가',
+        'edit_item' => '책 수정',
+        'new_item' => '책 추가',
+        'all_items' => '책 목록',
+        'view_item' => '책 상세 보기',
+        'search_items' => '책 검색',
+        'not_found' =>  '등록된 책이 없습니다',
+        'not_found_in_trash' => '휴지통에 책이 없습니다',
+        'parent_item_colon' => '부모 책:',
+        'menu_name' => '책',
+      );
+
+재밌는 게 있는데, 새 책을 추가하는 게 무려 세 개나 있다. (`add_new`, `add_new_item`, `new_item`) 이건 새 아이템을 추가하는 버튼이 나오는 위치에 따라 버튼 이름이 저렇게 다른 건데, 어차피 다 같은 역할을 하기 때문에 그냥 '책 추가'로 다 똑같이 적어 줬다.
+
+그리고 `name`과 `singular_name`이 있는 이유는 영어의 복수형 때문이다. 영어로 이름표를 붙이는 경우라면 `name`에는 'Books'라고, `singular_name`에는 'Book'이라고 써 준다. 하지만 우리는 굳이 복수형으로 '책들'이라고 부르지 않기 때문에 둘 다 똑같이 '책'이라고 넣어 줬다. 
+
+`parent_item_colon`은 계층형(hierarchical)인 경우에 이름을 어떻게 표시해 줄지 사용하는 것 같은데, 사실 우리가 등록한 book post type은 `hierarchical`이 `false`라서 굳이 이름표를 적어 주지 않아도 된다. 하지만 어떤 건지 알려 주기 위해 저렇게 적어 뒀다.
+
+자, 준비한 `$labels` 배열을 `$args`에 세팅해 보자.
+
+    $args = array(
+      'labels' => $labels,
+      'public' => true,
+      'has_archive' => true,
+    );
+
+그러면 전체적인 그림은 아래처럼 될 것이다. (commit checksum `47f0e2a`)
+
+    //===== book custom post type =====
+
+    function mpub_custom_post_type() {
+
+      $labels = array(
+        'name' => '책',
+        'singular_name' => '책',
+        'add_new' => '책 추가',
+        'add_new_item' => '책 추가',
+        'edit_item' => '책 수정',
+        'new_item' => '책 추가',
+        'all_items' => '책 목록',
+        'view_item' => '책 상세 보기',
+        'search_items' => '책 검색',
+        'not_found' =>  '등록된 책이 없습니다',
+        'not_found_in_trash' => '휴지통에 책이 없습니다',
+        'parent_item_colon' => '부모 책:',
+        'menu_name' => '책',
+      );
+
+      $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'has_archive' => true,
+      );
+
+      register_post_type( 'book', $args );
+    }
+    add_action( 'init', 'mpub_custom_post_type' );
+
+그리고 관리자 화면에 들어가 보면 아래처럼 이름표가 적절하게 나오는 것을 볼 수 있다.
+
+!['책 목록', '책 추가'라고 나온다.](img/img02-admin-book-menu.png)
+
+
+
+
+
+
+
+
+
+
 
 
