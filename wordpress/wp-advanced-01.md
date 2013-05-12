@@ -1,4 +1,4 @@
-# 워드프레스 고급 코딩하기
+s# 워드프레스 고급 코딩하기
 
 날짜: 2013-05-13   
 워드프레스 현재 버전 : 3.5.1
@@ -17,9 +17,9 @@ page는 기본 taxonomy가 없다. 그러나 계층형(hierarchical)으로 만�
 
 ### 새로운 콘텐츠 타입
 
-개인 블로그나 간단한 웹사이트는 post와 page 타입과 기본으로 제공하는 category, tag taxonomy만으로 충분히 소화 가능하다. 그러나 출판사의 책 판매 웹사이트를 만들어야 한다면? 이야기가 달라진다. 물론, 사용자 필드(custom field)를 이용해서 정보들을 넣는 선택을 할 수도 있다. 하지만 깔끔한 구조는 아니다. post나 page가 아닌 book이라는 새로운 콘텐츠 타입을 만드는 게 가장 깔끔할 것이다. 이렇게 새로운 콘텐츠 타입을 custom post type이라고 한다. 개발자가 작업을 하면 관리자 페이지로 이런 새로운 콘텐츠 타입을 쉽게 통합할 수 있다.
+개인 블로그나 간단한 웹사이트는 post와 page 타입과 기본으로 제공하는 category, tag taxonomy만으로 충분히 소화 가능하다. 그러나 출판사의 책 판매 웹사이트를 만들어야 한다면? 이야기가 달라진다. 물론, 사용자 필드(custom field)를 이용해서 정보들을 넣는 선택을 할 수도 있다. 하지만 깔끔한 구조는 아니다. post나 page가 아닌 book이라는 새로운 콘텐츠 타입을 만드는 게 가장 깔끔할 것이다. 이렇게 새로운 콘텐츠 타입을 custom post type이라고 한다. 개발자가 작업을 하면 관리자 페이지로 이런 새로운 콘텐츠 타입을 쉽게 통합할 수 있다. 이 부분의 기본적인 내용은 [Codex의 register_post_type 함수 레퍼런스](http://codex.wordpress.org/Function_Reference/register_post_type)를 참고하면 된다.
 
-book에는 저자와 주제라는 taxonomy가 필요할 거다. 저자는 한 책에 여럿이 붙을 수 있다는 점에서 tag와 성격이 비슷한 taxonomy고 주제는 계층구조라는 점에서 category와 유사하다. 물론 세부적인 차이는 있지만 말이다. 여튼간에 이런 경우 custom taxonomy라는 기능을 이용하면 된다.
+book에는 저자와 주제라는 taxonomy가 필요할 거다. 저자는 한 책에 여럿이 붙을 수 있다는 점에서 tag와 성격이 비슷한 taxonomy고 주제는 계층구조라는 점에서 category와 유사하다. 물론 세부적인 차이는 있지만 말이다. 여튼간에 이런 경우 custom taxonomy라는 기능을 이용하면 된다. 이 부분의 기본적인 내용은 [Codex의 register_taxonomy 함수 레퍼런스](http://codex.wordpress.org/Function_Reference/register_taxonomy)를 참고하면 된다.
 
 ### 관리자 페이지 코딩하기
 
@@ -27,9 +27,9 @@ book이라는 custom post type을 만들었다고 끝나는 게 아니다. book�
 
 부제는 책 제목의 일부고, 웹브라우저의 title 영역에 노출되야 하기 때문이다. custom field로 한다고 웹브라우저의 title 영역에 노출 못 할 건 아니지만 손대야 하는 데가 너무 많고, 잦을 수 있다. 그러니 속편하게 제목(post_title)에 부제까지 포함해서 넣고 페이지에서 보여 줄 때만 파싱해서 모양만 다르게 보여 주는 게 나을 것이다.
 
-부제는 파싱해야 하긴 하지만, 관리자 페이지에서 손댈 건 없어 오히려 간편하다. 그러나 목차와 미리 보기는 book 입력/수정 페이지에서 에디터를 제공해야 할 것이다. 이러면 개발자가 손을 대야 한다. 이건 메타 박스(metabox)를 등록해서 해결하면 된다. post 편집(입력/수정) 페이지를 구성하는 각각의 한 요소를 워드프레스에서는 metabox라고 부르나 보다.
+부제는 파싱해야 하긴 하지만, 관리자 페이지에서 손댈 건 없어 오히려 간편하다. 그러나 목차와 미리 보기는 book 입력/수정 페이지에서 에디터를 제공해야 할 것이다. 이러면 개발자가 손을 대야 한다. 이건 메타 박스(meta box)를 등록해서 해결하면 된다. post 편집(입력/수정) 페이지를 구성하는 각각의 한 요소를 워드프레스에서는 meta box라고 부르나 보다. meta box를 추가하려면 [Codex의 add_meta_box 함수 레퍼런스](http://codex.wordpress.org/Function_Reference/add_meta_box)를 참고하면 된다.
 
-관리자의 목록 화면에서 custom field도 표시해 주면 좋을 것이고, custom field나 taxonomy를 바탕으로 검색도 할 수 있다면 좋을 것이다. 이런 것들도 모두 처리할 수 있도록 해야 할 것이다.
+관리자의 목록 화면에서 custom field도 표시해 주면 좋을 것이고, custom field나 taxonomy를 바탕으로 검색도 할 수 있다면 좋을 것이다. 이런 것들도 모두 처리할 수 있도록 해야 할 것이다. Custom Taxonomy로 필터링하는 것은 [[워드프레스] 관리자 글목록에서 custom taxonomy로 필터링할 수 있도록 하기](http://mytory.net/archives/9090)를 참고하면 되고, Custom Field를 바탕으로 검색하도록 하는 것은 $wp_query를 이용해서 해야 하는데, 현재 따로 참고할 만한 게 없으므로 내가 설명할 것이다.
 
 ### 새로운 콘텐츠 타입을 클라이언트 단에서 불러 오기
 
