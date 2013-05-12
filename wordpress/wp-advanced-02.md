@@ -215,3 +215,5 @@ commit checksum : `fb6c08d`
 그러면 이제 아래처럼 가장 위에 책이 나온다.
 
 ![글 위에 책이 나온다.](img/img03-admin-book-menu-position.png)
+
+이로써 이번 챕터 끝!
