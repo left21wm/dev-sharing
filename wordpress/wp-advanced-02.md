@@ -22,43 +22,43 @@
 
 여기에 아래 코드를 넣어 보자. 코드는 차분히 설명할 테니 일단 따라해 보자.
 
-  //===== book custom post type =====
+    //===== book custom post type =====
 
-  function mpub_custom_init() {
-    $labels = array(
-      'name' => '책',
-      'singular_name' => '책',
-      'add_new' => '책 추가',
-      'add_new_item' => '책을 추가',
-      'edit_item' => '책 수정',
-      'new_item' => '새로운 책',
-      'all_items' => '책 목록',
-      'view_item' => '책 상세 보기',
-      'search_items' => '책 검색',
-      'not_found' =>  '등록된 책이 없습니다',
-      'not_found_in_trash' => '휴지통에 책이 없습니다',
-      'parent_item_colon' => '',
-      'menu_name' => '책'
-    );
+    function mpub_custom_init() {
+      $labels = array(
+        'name' => '책',
+        'singular_name' => '책',
+        'add_new' => '책 추가',
+        'add_new_item' => '책을 추가',
+        'edit_item' => '책 수정',
+        'new_item' => '새로운 책',
+        'all_items' => '책 목록',
+        'view_item' => '책 상세 보기',
+        'search_items' => '책 검색',
+        'not_found' =>  '등록된 책이 없습니다',
+        'not_found_in_trash' => '휴지통에 책이 없습니다',
+        'parent_item_colon' => '',
+        'menu_name' => '책'
+      );
 
-    $args = array(
-      'labels' => $labels,
-      'public' => true,
-      'publicly_queryable' => true,
-      'show_ui' => true,
-      'show_in_menu' => true,
-      'query_var' => true,
-      'rewrite' => array( 'slug' => 'book' ),
-      'capability_type' => 'post',
-      'has_archive' => true,
-      'hierarchical' => false,
-      'menu_position' => null,
-      'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
-    );
+      $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'query_var' => true,
+        'rewrite' => array( 'slug' => 'book' ),
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'menu_position' => null,
+        'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
+      );
 
-    register_post_type( 'book', $args );
-  }
-  add_action( 'init', 'mpub_custom_init' );
+      register_post_type( 'book', $args );
+    }
+    add_action( 'init', 'mpub_custom_init' );
 
 이렇게 하고 관리자 페이지에 들어가 보면, '책'이라는 메뉴가 생긴 것을 알 수 있다.
 
