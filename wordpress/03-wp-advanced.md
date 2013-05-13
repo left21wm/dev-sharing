@@ -41,7 +41,7 @@
 
     taxonomy-[tax]-[term].php → taxonomy-[tax].php → taxonomy.php → archive.php → index.php
 
-`tax`는 taxonomy의 slug를 말하는 것이고, term은 taxonomy의 구체적 내용의 slug를 말하는 것이다. 예컨대, `author`라는 taxonomy가 있고, 이 아래 알렉스 캘리니코스라는 author가 있다고 하자. 이 author의 slug는 `alex-callinicos`다. 알렉스만을 위한 페이지를 만들려면 `taxonomy-author-alex-callinicos.php`라는 파일을 만들면 된다. 물론 그럴 일은 많지 않을 것이다. 보통은 `taxonomy-author.php`만 만들면 될 것이다. 그러나 사실 그것까지도 필요 없다. 출판사 사이트의 경우 책 목록 페이지의 구성은 모두 같으므로 그냥 `archive.php`를 잘 만들면 된다.
+`tax`는 taxonomy의 slug를 말하는 것이고, `term`은 taxonomy의 구체적 내용의 slug를 말하는 것이다. 예컨대, `author`라는 taxonomy가 있고, 이 아래 알렉스 캘리니코스라는 author가 있다고 하자. 이 author의 slug는 `alex-callinicos`다. 알렉스만을 위한 페이지를 만들려면 `taxonomy-author-alex-callinicos.php`라는 파일을 만들면 된다. 물론 그럴 일은 많지 않을 것이다. 보통은 `taxonomy-author.php`만 만들면 될 것이다. 그러나 사실 그것까지도 필요 없다. 출판사 사이트의 경우 책 목록 페이지의 구성은 모두 같으므로 그냥 `archive.php`를 잘 만들면 된다.
 
 ### custom taxonomy를 등록해 보자
 
@@ -57,7 +57,7 @@
 
     include 'functions-custom-taxonomy.php';
 
-### 저자, 번역자를 만들어 보자
+### 저자와 번역자를 만들어 보자
 
 이제 준비가 됐으니 `functions-custom-taxonomy.php`에 코드를 작성해 넣자. 일단 코드의 기본형은 아래와 같을 것이다.
 
@@ -149,3 +149,46 @@
 ![저자 메타 박스](img/img05-author-meta-box.png)
 
 이렇게 custom taxonomy를 추가하면 자동으로 편집 항목에 나타난다. 태그형이므로 선택을 하는 게 아니라 사용자가 입력을 하게 돼 있는데, 이미 있는 항목의 경우엔 일부를 입력하면 자동완성 항목으로 나타난다. 이게 CMS를 이용하면 편리한 점이다. 자잘한 반복에서 벗어나 비즈니스 로직에만 집중할 수 있게 해 주는 것이다.
+
+### 번역자를 추가해 보자
+
+저자와 똑같이 하면 된다. 간단하니 코드만 제시하겠다. 신경쓸 점은 코드를 `mpub_custom_taxonomy` 안에 넣으면 된다는 거다. 한 번 `add_action`으로 등록을 했으니 다시 등록할 필요 없이 custom taxonomy를 추가로 등록할 때는 `mpub_custom_taxonomy` 함수 안에서 다 처리하면 되는 거다. 그래서 완성된 코드는 아래와 같다. 저자 코드 부분은 생략했다. 
+
+    function mpub_custom_taxonomy(){
+
+      // 저자 관련 코드는 생략
+
+      $labels_translator = array(
+        'name' => '번역자',
+        'singular_name' => '번역자',
+        'search_items' => '번역자 검색',
+        'popular_items' => '많이 쓴 번역자',
+        'all_items' => '번역자 목록',
+        'parent_item' => null,
+        'parent_item_colon' => null,
+        'edit_item' => '번역자 수정', 
+        'view_item' => '번역자 보기',
+        'update_item' => '저장',
+        'add_new_item' => '번역자 추가',
+        'new_item_name' => '새 번역자 이름',
+        'separate_items_with_commas' => '여러 명 입력하려면 쉽표(,)로 구분하세요',
+        'add_or_remove_items' => '번역자 추가 혹은 삭제',
+        'choose_from_most_used' => '많이 쓴 번역자 중 선택',
+        'not_found' => '번역자가 없습니다',
+        'menu_name' => '번역자',
+      );
+
+      $args = array('labels'=>$labels_translator);
+
+      register_taxonomy('translator', 'book', $args);
+    }
+    add_action('init', 'mpub_custom_taxonomy');
+
+
+
+
+
+
+
+
+
