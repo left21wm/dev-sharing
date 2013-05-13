@@ -49,6 +49,25 @@ book을 만들었으니, 그걸 클라이언트 단에서 목록으로 제공을
 
 ### 예제 소스파일
 
-예제 소스파일은 내 github에서 다운받을 수 있다. 시작할 때는 [학습을 위해 기본 세팅을 해 둔 버전](https://github.com/mytory/wp-publisher/tree/standby)을 다운받으면 된다. 나중엔 완성된 버전도 제공할 것이다.
+예제 소스파일은 내 github에서 다운받을 수 있다. 아래 커맨드로 최신 버전을 받을 수 있다.
+
+    git clone http://github.com/mytory/wp-publisher.git
+
+clone한 뒤에 학습을 위해 기본 세팅을 해 둔 버전으로 checkout하고 튜토리얼을 시작하면 된다. 아래 명령을 치면 된다.
+
+    git checkout standby
+
+git 사용에 익숙치 않다면 다운로드도 할 수 있다.
+
+* 학습을 시작할 때는 [학습을 위해 기본 세팅을 해 둔 버전](https://github.com/mytory/wp-publisher/tree/standby)을 다운받으면 된다. 
+* 완성 버전을 받으려면 [최신 버전](https://github.com/mytory/wp-publisher)을 다운받으면 된다.
 
 위 소스 파일은 워드프레스 3.5.1로 돼 있으며, `wp-config.php`는 포함하고 있지 않다. 기본적인 서버 세팅은 알아서 해야 한다. 위 소스 파일은 기본적인 워드프레스 버전에 `mytory-publisher`라는 테마만 추가한 것이다.
+
+각 소스를 설명할 때는 commit checksum을 표기해 뒀다. 이 경우 git가 연결된 상태에서 아래처럼 쓰면 해당 단계로 소스가 세팅된다. 아래 코드에서는 checksum을 a1s2d3으로 가정했다.
+
+    git checkout a1s2d3
+
+주요 부분에서는 git tag 이름을 써 뒀는데 이 경우에도 해당 tag로 checkout하면 소스 코드가 해당 tag로 세팅된다.
+
+    git checkout tag_name
