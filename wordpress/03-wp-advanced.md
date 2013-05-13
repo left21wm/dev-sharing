@@ -1,4 +1,4 @@
-## 관리자 페이지 코딩하기 - custom field와 custom taxonomy를 추가하고 meta box를 만들어 보자
+## 관리자 페이지 코딩하기 - custom taxonomy로 저자와 번역자 추가하기
 
 ### 기획
 
@@ -152,11 +152,11 @@
 
 ### 번역자를 추가해 보자
 
-저자와 똑같이 하면 된다. 간단하니 코드만 제시하겠다. 신경쓸 점은 코드를 `mpub_custom_taxonomy` 안에 넣으면 된다는 거다. 한 번 `add_action`으로 등록을 했으니 다시 등록할 필요 없이 custom taxonomy를 추가로 등록할 때는 `mpub_custom_taxonomy` 함수 안에서 다 처리하면 되는 거다. 그래서 완성된 코드는 아래와 같다. 저자 코드 부분은 생략했다. 
+저자와 똑같이 하면 된다. 간단하니 코드만 제시하겠다. 신경쓸 점은 코드를 `mpub_custom_taxonomy` 안에 넣으면 된다는 거다. 한 번 `add_action`으로 등록을 했으니 다시 등록할 필요 없이 custom taxonomy를 추가로 등록할 때는 `mpub_custom_taxonomy` 함수 안에서 다 처리하면 되는 거다. 그래서 완성된 코드는 아래와 같다. 저자 코드 부분은 생략했다. (commit checksum `3b0820e`)
 
     function mpub_custom_taxonomy(){
 
-      // 저자 관련 코드는 생략
+      // 저자 관련 코드는 생략...
 
       $labels_translator = array(
         'name' => '번역자',
