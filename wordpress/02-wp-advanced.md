@@ -1,4 +1,4 @@
-## custom post type - book을 만들어 보자
+## 새로운 콘텐츠 타입 - custom post type으로 book을 만들어 보자
 
 ### 기본 개념
 
