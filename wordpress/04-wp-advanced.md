@@ -49,6 +49,6 @@
 
     register_taxonomy('book-subject', 'book', $args);
 
-이러면 주제 분류가 완성. 아래처럼 관리자 화면에 등장한다. (commit checksum `d2a12a`)
+이러면 주제 분류가 완성. 아래처럼 관리자 메뉴와 책 추가 화면에 등장한다. (commit checksum `d2a12a`)
 
 ![주제 분류가 관리자 메뉴에 등장했다.](img/img06-book-subject-menu.png) ![이렇게 책 추가 화면에 들어오면 메타박스로 주제 분류가 들어와 있다.](img/img07-book-subject-meta-box.png)
