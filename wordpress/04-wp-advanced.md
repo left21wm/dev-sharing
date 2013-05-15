@@ -52,3 +52,32 @@
 이러면 주제 분류가 완성. 아래처럼 관리자 메뉴와 책 추가 화면에 등장한다. (commit checksum `d2a12a`)
 
 ![주제 분류가 관리자 메뉴에 등장했다.](img/img06-book-subject-menu.png) ![이렇게 책 추가 화면에 들어오면 메타박스로 주제 분류가 들어와 있다.](img/img07-book-subject-meta-box.png)
+
+### 새로 나온 책 여부와 추천 책 여부를 만들어 보자
+
+custom taxonomy를 사용해서 만들 마지막 놈은 새로 나온 책 여부와 추천 책 여부다. 이 두 가지를 굳이 custom taxonomy로 만드는 이유는, 일단 taxonomy(분류 쳬계)가 맞으니까 그런 거고, 부수적으로는 목록을 쉽게 뽑기 위해서 그런 것이다.
+
+코드를 반복하지는 않겠다. 두 경우 모두 값(term)은 y와 n밖에 없어야 하고 사용자가 맘대로 입력할 수 없도록 해야 한다. 계층형인 것은 아니지만 그래서 계층형으로 만들어야 한다. 사용자가 실수로 term을 만드는 경우가 없도록 하기 위해서 `hierarchical`을 `true`로 주도록 하자. 꼼꼼히 신경쓸 taxonomy가 아니니까 `labels`로 하지 않고 `label`로 했다. 그래서 `mpub_custom_taxonomy` 함수 안에 아래 코드를 넣으면 완료다. 새로 나온 책 여부라고 하기가 너무 길어서 그냥 일반적으로 쓰는 용어인 '신간'으로 변경해서 이름표를 붙였다. (commit checksum `e7373ad`)
+
+    $args = array(
+      'label' => '신간 여부',
+      'hierarchical' => TRUE,
+    );
+    register_taxonomy('new-book', 'book', $args);
+
+
+    $args = array(
+      'label' => '추천 책 여부',
+      'hierarchical' => TRUE,
+    );
+    register_taxonomy('recommend-book', 'book', $args);
+
+그리고 'y'라는 term 하나만 만들면 된다. 어차피 'y'에 들어있지 않으면 'n'이니 말이다. (term은 taxonomy의 값이다. 번역하면 '용어'인데, 여튼 분류의 내용을 말한다. 주제라는 taxonomy 밑에는 경제라는 term이 있는 것이다.)
+
+책 추가에 들어가 보면 아래처럼 나온다.
+
+![책 추가 화면에 나오는 신간 여부와 추천 책 여부](img/img08-new-recommend-book.png)
+
+
+
+
