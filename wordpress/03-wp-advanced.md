@@ -183,12 +183,3 @@
       register_taxonomy('translator', 'book', $args);
     }
     add_action('init', 'mpub_custom_taxonomy');
-
-
-
-
-
-
-
-
-
