@@ -1,4 +1,4 @@
-## 관리자 페이지 코딩하기 - keyword 바로 잡기, custom taxonomy로 주제 분류 추가하기
+## 관리자 페이지 코딩하기 - keyword 바로 잡기, custom taxonomy로 주제 분류 추가하기, 목록에 custom taxonomy 노출하기
 
 ### keyword 충돌 방지
 
@@ -127,6 +127,3 @@ CSS를 만들었다면 이제 관리자 화면에서 CSS를 불러올 수 있도
 뭐, 알 사람들은 알겠지만, js를 큐에 쌓아야 할 경우엔 `wp_enqueue_script`를 사용하면 된다. 이렇게 작성하고 책 목록 화면에 들어가 보면 깔끔하게 정리된 것을 볼 수 있다.
 
 ![책 목록 화면의 열 너비가 정리됐다.](img10-admin-list-style.png)
-
-
-
