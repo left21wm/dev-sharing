@@ -78,6 +78,55 @@ custom taxonomy를 사용해서 만들 마지막 놈은 새로 나온 책 여부
 
 ![책 추가 화면에 나오는 신간 여부와 추천 책 여부](img/img08-new-recommend-book.png)
 
+### 관리자 목록에서 custom taxonomy 나오게 하기
+
+이제 관리자 목록 화면에서 custom taxonomy가 나오도록 해 보자. 워드프레스 3.5 버전부터는 `register_taxonomy`의 `$args`에 옵션을 주는 것으로 목록에 custom taxonomy를 출력하는 게 가능해졌다. 아래처럼 `show_admin_column` 옵션을 `TRUE`로 주면 된다.
+
+    $args = array(
+      'labels' => $labels_author,
+      'show_admin_column' => TRUE,
+    );
+
+자, 지금까지 생성한 모든 custom taxonomy에 `show_admin_column` 옵션을 `TRUE`로 주자. (commit checksum `3096586`)
+
+그러면 아래처럼 나올 거다.
+
+![자, 이렇게 관리자 목록에 나온다. 그런데 열 너비가 엉망이다.](img/img09-show-admin-column.png)
+
+그런데 너비가 엉망이다. 이건 관리자 화면 CSS를 조정해서 해결해야 한다. 쉬우니 빠르게 해 보자!
+
+### 관리자 화면용 CSS 등록하고 적용하기
+
+일단 `admin.css` 파일을 테마 폴더에 만들어 넣자. 그리고 아래처럼 CSS 코드를 써 넣자. CSS 코드까지 굳이 설명하진 않겠다.
+
+    @charset "utf-8";
+    .column-taxonomy-book-author,
+    .column-taxonomy-translator,
+    .column-taxonomy-new-book,
+    .column-taxonomy-recommend-book {
+        width: 7%;
+    }
+    .column-taxonomy-book-subject {
+        width: 14%;
+    }
+
+각 taxonomy가 나오는 `th`와 `td`에는 `column-taxonomy-[slug]` 형식의 클래스가 붙는다. 따라서 그 놈의 너비를 지정해 주면 된다.
+
+CSS를 만들었다면 이제 관리자 화면에서 CSS를 불러올 수 있도록 해야 할 것이다. 이 때 쓰는 게 action의 `admin_enqueue_scripts` 키워드다. 이건 custom post type이나 custom taxonomy가 아니니까 `functions.php` 파일에 넣자. (commit checksum `9ec97e6`)
+
+    /**
+     * 관리자 화면용 CSS
+     */
+    function mpub_admin_scripts_styles(){
+      wp_enqueue_style( 'mpub-admin', get_template_directory_uri() . '/admin.css');
+    }
+    add_action('admin_enqueue_scripts', 'mpub_admin_scripts_styles');
+
+`admin_enqueue_scripts` 키워드엔 js만 걸어야 할 것 같지만 사실 스타일까지 다 건다. 다들 그렇게 하더라. 그리고, 역시 스타일을 발동해 주는 함수를 실행하는 함수를 만든 다음 그걸 명시해 준다. `do_action( 'admin_enqueue_scripts' )`라는 코드가 명시해 준 `mpub_admin_scripts_styles` 함수를 실행하게 될 것이고, 그러면 우리가 등록한 `mpub-admin` 스타일을 큐에 쌓아 줄 것이다. 큐에 쌓인 이 스타일은 HTML을 출력할 때 적당한 위치에서 또 출력될 것이다. 
+
+뭐, 알 사람들은 알겠지만, js를 큐에 쌓아야 할 경우엔 `wp_enqueue_script`를 사용하면 된다. 이렇게 작성하고 책 목록 화면에 들어가 보면 깔끔하게 정리된 것을 볼 수 있다.
+
+![책 목록 화면의 열 너비가 정리됐다.](img10-admin-list-style.png)
 
 
 
