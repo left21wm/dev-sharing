@@ -20,13 +20,14 @@ LEFT21 개발팀 코드 작성 규약
 * 약어는 사회적으로 통용되는 것만 사용하고 따로 만들어서 사용하지 않는다.
 * `$i`, `$j`, `$tmp`, `$temp` 등은 알아서 쓴다.
 * 파일 구조는 폴더로만 구분하고 접두어로 구분하지 않는다. 접두어는 내용에 관련한 것만.
-* 파일 CRUD 작명은 다음을 기본으로 한다.
+* 파일 작명은 다음을 기본으로 한다.
     * person-detail.php
     * person-manage.php (입력/수정 통합)
     * person-action.php
     * person-list.php
     * person-delete.php
 * 함수 CRUD 작명은 다음을 기본으로 한다.
+    * get_person
     * insert_person
     * update_person
     * delete_person
