@@ -1,0 +1,8 @@
+#!/bin/sh
+
+for s in php js css html; do
+	for f in $(find $1 -name "*.$s"); do
+		expand --tab=4 $f > $f.notab
+		mv $f.notab $f
+	done;
+done;
