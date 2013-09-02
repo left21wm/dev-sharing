@@ -1,3 +1,5 @@
+- Date: 2013-09-02 16:14:31
+
 # 레프트21 웹개발팀 SMACSS 세미나
 
 유지보수 용이성을 향상시키기 위해 기획한 세미나다. [OOCSS](https://github.com/stubbornella/oocss/wiki)와 [SMACSS](http://smacss.com/)를 기본으로 삼았고, 더 잘 정리돼 있고 포괄적인 SMACSS를 우선 탐구 대상으로 삼았다. SMACSS는 책이 온라인에 무료로 공개돼 있었기 때문에 접근하기 좋았다.
