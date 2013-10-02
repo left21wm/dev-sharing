@@ -6,7 +6,7 @@ git brnach 활용하기, 충돌 관리하기
 branch가 필요한 이유
 ------------------
 
-branch를 엄청난 속도로 만들고 통합할 수 있는 것이야말로 git의 최대 장점이라고 생각한다. 그러니 일단은 활용을 하는 게 좋겠다. 검색해 보면 작업 과정(Work Flow)에 따라 branch를 어떻게 활용하는지도 찾아볼 수 있다. 그러나 일단은 개인적, 기본적인 것부터 활용을 해 보자. 그래서 익숙해져야 Flow도 따라갈 수 있을 것 같다.
+branch를 엄청난 속도로 만들고 통합할 수 있는 것이야말로 git의 최대 장점이라고 생각한다. 그러니 일단은 활용을 하는 게 좋겠다. 검색해 보면 작업과정(Workflow)에 따라 branch를 어떻게 활용하는지도 찾아볼 수 있다. 그러나 일단은 개인적, 기본적인 것부터 활용을 해 보자. 그래서 익숙해져야 작업과정에 따른 다양한 시나리오를 그려 볼 수 있을 것 같다. (자세한 시나리오는 ['이클립스로 GIT 사용하기'](http://www.slideshare.net/UyeongJu/git-15379130)나 ['분산 환경에서의 Git - 분산 환경에서의 Workflow'](http://git-scm.com/book/ko/%EB%B6%84%EC%82%B0-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C%EC%9D%98-Git-%EB%B6%84%EC%82%B0-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C%EC%9D%98-Workflow)를 참고하자. ['Git 브랜치 - 브랜치 Workflow'](http://git-scm.com/book/ko/Git-%EB%B8%8C%EB%9E%9C%EC%B9%98-%EB%B8%8C%EB%9E%9C%EC%B9%98-Workflow)에 나오는 Topic branch가 이 예제에서 설명하는 branch 종류다.)
 
 branch를 기본적으로 활용하는 것은 아주 쉽다. 다음 시나리오를 머리에 그려 보자.
 
