@@ -1,4 +1,4 @@
-git brnach 활용하기, 충돌 관리하기
+git branch 활용하기, 충돌 관리하기
 ===============================
 
 세미나 날짜 : 2013-10-03
@@ -35,7 +35,7 @@ branch 연습으로 들어가기 전에 개념을 하나 익히자. branch 없�
         <li class="list-item">이것은 6번째 li입니다.</li>
     </ul>
 
-자, 인덱스를 개편해야 한다. branch를 만들자. branch 이름은 renewal이다.
+이 코드는 현재 커밋된 상태다. 자, 인덱스를 개편해야 한다. branch를 만들자. branch 이름은 renewal이다. 현재 코드가 모두 커밋돼 있어야 branch를 만들 수 있으니 커밋을 잊지 말자.
 
     git branch renewal
 
@@ -169,7 +169,6 @@ index.html을 아래처럼 고쳤다. 제목과 목록, 더 보기를 합쳐서 
             <li class="list-item">이것은 5번째 li입니다.</li>
             <li class="list-item">이것은 6번째 li입니다.</li>
         </ul>
-        <a href="#">더 보기</a>
     </div>
 
 `list-box`라는 클래스가 전체를 감쌌다. `h2`에도 클래스가 붙었다. `git diff`라고 쳐 보면 아래처럼 나온다. 맨 앞에 `-`가 붙은 게 삭제된 것, `+`가 붙은 게 추가된 것이다.
@@ -191,7 +190,6 @@ index.html을 아래처럼 고쳤다. 제목과 목록, 더 보기를 합쳐서 
     -        <li class="list-item">이것은 5번째 li입니다.</li>
     -        <li class="list-item">이것은 6번째 li입니다.</li>
     -    </ul>
-    -    <a href="#">더 보기</a>
     +    <div class="list-box">
     +        <h2 class="list-box__title">Branch 연습용 목록</h2>
     +        <ul class="unordered-list">
@@ -202,7 +200,6 @@ index.html을 아래처럼 고쳤다. 제목과 목록, 더 보기를 합쳐서 
     +            <li class="list-item">이것은 5번째 li입니다.</li>
     +            <li class="list-item">이것은 6번째 li입니다.</li>
     +        </ul>
-    +        <a href="#">더 보기</a>
     +    </div>
      </body>
      </html>
@@ -213,17 +210,17 @@ index.html을 아래처럼 고쳤다. 제목과 목록, 더 보기를 합쳐서 
     git commit -am "list-box 클래스 추가하고, h2에도 list-box__title 클래스 매김."
     git checkout renewal
 
-master에서 변경된 사항을 끌어와야 하니 `gir rebase master` 명령을 내려 보자. 그러면 아래처럼 충돌이 발생한다.
+master에서 변경된 사항을 끌어와야 하니 `git rebase master` 명령을 내려 보자. 그러면 아래처럼 충돌이 발생한다.
 
     First, rewinding head to replay your work on top of it...
-    Applying: BEM 방식 클래스명
+    Applying: 더 보기 버튼 추가
     Using index info to reconstruct a base tree...
     M	index.html
     Falling back to patching base and 3-way merge...
     Auto-merging index.html
     CONFLICT (content): Merge conflict in index.html
     Failed to merge in the changes.
-    Patch failed at 0001 BEM 방식 클래스명
+    Patch failed at 0001 더 보기 버튼 추가
     The copy of the patch that failed is found in:
        /path/to/.git/rebase-apply/patch
     
@@ -235,13 +232,13 @@ master에서 변경된 사항을 끌어와야 하니 `gir rebase master` 명령�
 
 
     우선, 작업을 처음부터 재실행하기 위해서 head로 되감습니다.
-    'BEM 방식 클래스명'을 적용중입니다.
+    '더 보기 버튼 추가'를 적용중입니다.
     base tree를 재구축하기 위해 색인 정보를 사용중입니다.
     M index.html (index.html이 수정됐다는 뜻)
     base 재구축과 3방향 합치기가 잘못되는 경우에 대한 대비책을 만들고 있습니다.
     index.html을 자동으로 합칩니다.
     충돌 발생 (내용): index.html에서 합치기 충돌 발생
-    '0001 BEM 방식 클래스명' patch 실패
+    '0001 더 보기 버튼 추가' patch 실패
     실패한 patch는 다음 경로에서 볼 수 있습니다.
         /path/to/.git/rebase-apply/patch
     
@@ -266,32 +263,32 @@ index.html을 열어 보면 아래와 같이 충돌이 난 부분이 표시돼 �
                 <li class="list-item">이것은 5번째 li입니다.</li>
                 <li class="list-item">이것은 6번째 li입니다.</li>
             </ul>
-            <a href="#">더 보기</a>
         </div>
     =======
         <h2>Branch 연습용 목록</h2>
-        <ul class="index-list">
-            <li class="index-list__item">이것은 1번째 li입니다.</li>
-            <li class="index-list__item">이것은 2번째 li입니다.</li>
-            <li class="index-list__item">이것은 3번째 li입니다.</li>
-            <li class="index-list__item">이것은 4번째 li입니다.</li>
-            <li class="index-list__item">이것은 5번째 li입니다.</li>
-            <li class="index-list__item">이것은 6번째 li입니다.</li>
+        <ul class="unordered-list">
+            <li class="list-item">이것은 1번째 li입니다.</li>
+            <li class="list-item">이것은 2번째 li입니다.</li>
+            <li class="list-item">이것은 3번째 li입니다.</li>
+            <li class="list-item">이것은 4번째 li입니다.</li>
+            <li class="list-item">이것은 5번째 li입니다.</li>
+            <li class="list-item">이것은 6번째 li입니다.</li>
         </ul>
         <a href="#">더 보기</a>
-    >>>>>>> BEM 방식 클래스명
+    >>>>>>> 더 보기 버튼 추가
 
-뭣때문인지는 모르지만, 'HEAD'랑 'BEM 방식 클래스명'이랑 합치다가 git가 판단을 못 하고 멈춰선 거다. 우리는 사람이니까 명료하게 판단을 할 수 있다. 우리가 얻어야 할 코드는 위쪽의 `list-box`와 `list-box__title` 코드, 아래쪽의 `index-list`와 `index-list__item`이다. 두 코드를 통합해서 아래처럼 만들자.
+
+뭣때문인지는 모르지만, 'HEAD'랑 'BEM 방식 클래스명'이랑 합치다가 git가 판단을 못 하고 멈춰선 거다. 우리는 사람이니까 명료하게 판단을 할 수 있다. 우리가 얻어야 할 코드는 위쪽의 `list-box`와 `list-box__title` 코드, 아래쪽의 더 보기 버튼이다. 두 코드를 통합해서 아래처럼 만들자.
 
     <div class="list-box">
         <h2 class="list-box__title">Branch 연습용 목록</h2>
-        <ul class="index-list">
-            <li class="index-list__item">이것은 1번째 li입니다.</li>
-            <li class="index-list__item">이것은 2번째 li입니다.</li>
-            <li class="index-list__item">이것은 3번째 li입니다.</li>
-            <li class="index-list__item">이것은 4번째 li입니다.</li>
-            <li class="index-list__item">이것은 5번째 li입니다.</li>
-            <li class="index-list__item">이것은 6번째 li입니다.</li>
+        <ul class="unordered-list">
+            <li class="list-item">이것은 1번째 li입니다.</li>
+            <li class="list-item">이것은 2번째 li입니다.</li>
+            <li class="list-item">이것은 3번째 li입니다.</li>
+            <li class="list-item">이것은 4번째 li입니다.</li>
+            <li class="list-item">이것은 5번째 li입니다.</li>
+            <li class="list-item">이것은 6번째 li입니다.</li>
         </ul>
         <a href="#">더 보기</a>
     </div>
@@ -318,9 +315,11 @@ index.html을 열어 보면 아래와 같이 충돌이 난 부분이 표시돼 �
 
 그리고 다시 `git rebase --continue` 명령을 내리자. 
 
+그러면 또다시 충돌이 벌어질 거다. 이번엔 'BEM 방식 클래스명'을 적용하다가 충돌이 난다. 위 순서대로 고친 뒤, `git add index.html`, `git rebase --continue`를 해 주자. 그러면,
+
     Applying: BEM 방식 클래스명
 
-이렇게 깔끔하게 한 줄만 나오고 끝났다. `git log`로 로그가 어떻게 변했는지 보자.
+이렇게 깔끔하게 한 줄만 나오고 끝난다. `git log`로 로그가 어떻게 변했는지 보자.
 
     commit c10a1e433b75dfe937fe55b0a43530653c4918a8
     Author: mytory <mytory@gmail.com>
@@ -328,17 +327,17 @@ index.html을 열어 보면 아래와 같이 충돌이 난 부분이 표시돼 �
 
         BEM 방식 클래스명
 
-    commit d2982daba131646e66591422c3ace21c9a64972e
-    Author: mytory <mytory@gmail.com>
-    Date:   Thu Oct 3 02:54:18 2013 +0900
-
-        list-box 클래스 추가하고, h2에도 list-box__title 클래스 매김.
-
     commit 26ac074b70e667222a51c882c96e2517aab66ba8
     Author: mytory <mytory@gmail.com>
     Date:   Thu Oct 3 01:48:25 2013 +0900
 
         더 보기 추가
+
+    commit d2982daba131646e66591422c3ace21c9a64972e
+    Author: mytory <mytory@gmail.com>
+    Date:   Thu Oct 3 02:54:18 2013 +0900
+
+        list-box 클래스 추가하고, h2에도 list-box__title 클래스 매김.
 
     commit 8d6fe1d6a6d4bd5dec10e46610f0eaf86df27825
     Author: mytory <mytory@gmail.com>
@@ -354,7 +353,7 @@ index.html을 열어 보면 아래와 같이 충돌이 난 부분이 표시돼 �
 
 코드 수정 순서를 논리적으로 재배열했다.
 
-    제목 추가 > 더 보기 추가 > list-box 클래스 추가 > BEM 방식 클래스명
+    제목 추가 > list-box 클래스 추가 > 더 보기 추가 > BEM 방식 클래스명
 
 순서로 코드 변경 기록을 재작성한 것이다.
 
@@ -366,9 +365,17 @@ branch를 중앙 저장소에 보내서 공동작업을 해야 할 때도 있을
 
     git push origin renewal
 
-원격 브랜치명을 다르게 할 수도 있다. 물론 권장하지 않는다. 예외적인 경우에만 사용하게 될 거다.
+전에 push를 한 상태에서 `git rebase master` 같은 걸 한 뒤 push를 하려고 하면 history가 변경됐기 때문에 push가 안 될 수 있다. 그런 경우엔 과감하게 아래 명령을 내리자.
+
+    git push -f origin renewal
+
+그러면 로컬의 branch 변경이력으로 원격의 branch 변경이력을 덮어 써버린다.
+
+원격 branch 이름을 다르게 할 수도 있다. 물론 권장하지 않는다. 예외적인 경우에만 사용하게 될 거다.
 
     git push origin renewal:remote-renewal
+
+로컬의 저장소 두 개를 하나의 원격 서버에 각각 저장해야 했을 때 저런 걸 써 본 적이 있는데, 관리하다가 실수할까봐 엄청 긴장했었다. 그런 상황은 빨리 없애 버렸다. 불가피하게 저런 상황에 직면하더라도 빨리 상황을 없애 버리기 바란다.
 
 branch를 master에 통합하고 삭제하기
 ----------------------------------
@@ -378,7 +385,7 @@ branch를 master에 통합하고 삭제하기
     git checkout master
     git rebase renewal
 
-아까는 renewal에서 master를 끌어왔지만, 이번엔 반대로 master에서 renewal을 끌어오는 거다. 그리고 아래 명령어로 renewal branch를 제거하면 된다.
+아까는 renewal에서 master를 끌어왔지만, 이번엔 반대로 master에서 renewal을 끌어오는 거다. 이미 master의 내용을 다 통합해 둔 상태이므로 별 충돌 없이 통합이 될 거다. 마지막으로 아래 명령어로 renewal branch를 제거해서 코드 혼란을 없앤다.
 
     git branch -d renewal
 
@@ -397,11 +404,16 @@ branch에서 코드를 작성하다가 master branch에서 긴급하게 수정�
 이후 위 명령어를 쳐서 master branch로 이동한 뒤, 코드를 수정하고 커밋까지 한 다음 아래 명령어를 사용해 수정하던 코드를 되살린다.
 
     git checkout my-branch
+
+일단 원래 작업하고 있던 branch로 돌아온다.
+
     git stash apply
+
+그리고 이렇게 하면 적용(apply)을 하면 수정중인 코드가 되살아난다.
 
 깔끔하게 완료!
 
-다른 방법도 있다. 그냥 간단하게 커밋을 한 뒤 취소하는 거다. 
+다른 방법도 있다. 그냥 간단하게 커밋을 한 뒤 취소하는 거다. 로컬에서 단선적으로 커밋을 하는 분산형 시스템이기 때문에 가능한 방법이다.
 
     git commit -am "임시"
 
@@ -409,7 +421,7 @@ branch에서 코드를 작성하다가 master branch에서 긴급하게 수정�
 
     git reset HEAD~
 
-그러면 마지막 커밋이 취소되고 모두 수정중인 상태가 된다.
+그러면 마지막 커밋이 취소되고 모두 수정중인 상태가 된다. (참고로 그냥 `git reset`은 `add`를 취소하는 명령이다. pull 같은 걸 하다가 충돌이 벌어졌는데 취소하고 싶다면 `git reset`을 하고, `git checkout ...`으로 원상복구한다.)
 
 ### 팁 - branch에서 작성중인 코드를 master로 옮기기
 
@@ -424,4 +436,3 @@ branch에서 한참 코드를 작성하다가, 이 코드는 branch에 있을 �
 ### 개념을 명확히!
 
 master는 branch의 하나다. 따라서 위 예제의 master를 다른 branch로 바꿔 이해해도 모든 것이 제대로 돌아간다.
-
