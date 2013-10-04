@@ -351,11 +351,9 @@ index.html을 열어 보면 아래와 같이 충돌이 난 부분이 표시돼 �
 
         initial
 
-코드 수정 순서를 논리적으로 재배열했다.
+코드 수정 순서가 재배열됐다. (내 생각엔 master 수정사항이 앞으로 들어가고, 현 branch의 내용이 뒤에 들어가는 것 같다.)
 
     제목 추가 > list-box 클래스 추가 > 더 보기 추가 > BEM 방식 클래스명
-
-순서로 코드 변경 기록을 재작성한 것이다.
 
 간단한 충돌 관리를 해 봤는데, 핵심은 이거다. "git가 시키는대로 해라." pull을 했을 때도, stash apply를 했을 때도 마찬가지다.
 
@@ -383,11 +381,13 @@ branch를 master에 통합하고 삭제하기
 리뉴얼이 끝나서 renewal branch를 master branch에 통합하기로 했다. 그럴 땐 아래처럼 하면 되겠다.
 
     git checkout master
-    git rebase renewal
+    git merge renewal
 
-아까는 renewal에서 master를 끌어왔지만, 이번엔 반대로 master에서 renewal을 끌어오는 거다. 이미 master의 내용을 다 통합해 둔 상태이므로 별 충돌 없이 통합이 될 거다. 마지막으로 아래 명령어로 renewal branch를 제거해서 코드 혼란을 없앤다.
+아까는 renewal에서 master를 끌어왔지만, 이번엔 반대로 master에서 renewal을 끌어오는 거다. 사실 renewal branch에서 이미 master의 내용을 다 통합해 둔 상태이므로 실제로 일어나는 일은 fast forward(git의 커서가 renewal branch의 내용까지 앞으로 이동하는 것)다. 마지막으로 아래 명령어로 renewal branch를 제거해서 코드 혼란을 없앤다.
 
     git branch -d renewal
+
+아직 master에 통합하지 않은 내용이 renewal branch에 남아있다면 삭제되지 않으니 걱정할 것 없다. 물론 `-D` 옵션을 주면 통합되지 않은 branch도 삭제된다.
 
 ### 팁 - stash 혹은 git reset HEAD~
 
@@ -421,7 +421,7 @@ branch에서 코드를 작성하다가 master branch에서 긴급하게 수정�
 
     git reset HEAD~
 
-그러면 마지막 커밋이 취소되고 모두 수정중인 상태가 된다. (참고로 그냥 `git reset`은 `add`를 취소하는 명령이다. pull 같은 걸 하다가 충돌이 벌어졌는데 취소하고 싶다면 `git reset`을 하고, `git checkout ...`으로 원상복구한다.)
+그러면 마지막 커밋이 취소되고 모두 수정중인 상태가 된다. (참고로 옵션없는 그냥 `git reset`은 `add`를 취소하는 명령이다. 또, pull이나 merge를 하다가 충돌이 벌어졌는데 취소하고 싶다면 `git reset`을 하고, `git checkout ...`으로 원상복구한다.)
 
 ### 팁 - branch에서 작성중인 코드를 master로 옮기기
 
