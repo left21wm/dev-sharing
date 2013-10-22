@@ -5,6 +5,6 @@
 
 기본적으로 터미널에 익숙하지 않고, SVN을 GUI로 주로 사용해 온 그룹에서 git 터미널 사용법을 바탕으로 개념을 좀 충실히 익혀 보고자 시작한 세미나다.
 
-참고한 텍스트는 [⟪pro git⟫](http://dogfeet.github.io/articles/2012/progit.html)이다. 
+참고한 텍스트는 [《pro git》](http://dogfeet.github.io/articles/2012/progit.html)이다. 
 
 이 세미나는 소규모 비공개 작업 팀에게 가장 알맞은 내용일 거라고 생각한다. 우리가 그런 팀이니까.
